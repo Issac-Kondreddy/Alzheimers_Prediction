@@ -35,16 +35,21 @@ The evaluation of MAs involved testing each algorithm against a set of benchmark
 #### Ackley's Function !!
 A popular optimization benchmark function, Ackley's function is known for its complex landscape with many local minima. It is designed to test an algorithm's ability to escape local minima and find the global minimum.
 ![Ackley's Function](https://www.sfu.ca/~ssurjano/ackley2.png)
+![Ackley's Function Image](https://static.wixstatic.com/media/40af5e_54cd6ec4d784436fa5e5c890cfb16c41~mv2.png/v1/fill/w_465,h_410,al_c,lg_1,q_85,enc_auto/40af5e_54cd6ec4d784436fa5e5c890cfb16c41~mv2.png)
 #### Sphere Function !!
 The Sphere function is deceptively simple, involving the sum of squares of its variables. It tests an algorithm's basic ability to hone in on a global minimum in a convex space without local minima distractions.
 
+![SphereFunction](https://www.sfu.ca/~ssurjano/spheref2.png)
+![Sphere Function Image](https://www.sfu.ca/~ssurjano/spheref.png)
 #### Rastrigin's Function !!
 Rastrigin's Function is a highly oscillatory function that provides a challenging landscape for optimization algorithms due to its large number of local minima. It's great for testing an algorithm's ability to find a global optimum amidst noise and local optima.
-
+![Rastrigin's Function](https://www.sfu.ca/~ssurjano/rastr2.png)
+![Rastrigin's Function Image](https://upload.wikimedia.org/wikipedia/commons/8/8b/Rastrigin_function.png)
 
 #### Rosenbrock's Function !!
 Also known as the Valley or Banana function, the Rosenbrock function is a non-convex function used to test the performance of optimization algorithms. It has a narrow, curved valley containing the global minimum, testing the algorithms' precision and convergence to the minimum.
-
+![Rosenbrock's  Function](https://www.sfu.ca/~ssurjano/rosensc.png)
+![Rosenbrock's  Function Image](https://www.sfu.ca/~ssurjano/rosen.png)
 
 These functions were chosen for their ability to test the algorithms' exploration and exploitation capabilities, convergence speed, and robustness to local optima.
 
