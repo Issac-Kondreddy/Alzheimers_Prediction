@@ -34,19 +34,16 @@ These algorithms were selected for their unique approaches to exploring and expl
 The evaluation of MAs involved testing each algorithm against a set of benchmark functions known for their challenging optimization landscapes. These functions include:
 #### Ackley's Function !!
 A popular optimization benchmark function, Ackley's function is known for its complex landscape with many local minima. It is designed to test an algorithm's ability to escape local minima and find the global minimum.
-- Equation: \(f(\mathbf{x}) = -20\exp\left(-0.2\sqrt{\frac{1}{n}\sum_{i=1}^{n}x_i^2}\right) - \exp\left(\frac{1}{n}\sum_{i=1}^{n}\cos(2\pi x_i)\right) + 20 + e\)
-
+![Ackley's Function](https://www.sfu.ca/~ssurjano/ackley2.png)
 #### Sphere Function !!
 The Sphere function is deceptively simple, involving the sum of squares of its variables. It tests an algorithm's basic ability to hone in on a global minimum in a convex space without local minima distractions.
-- Equation: \(f(\mathbf{x}) = \sum_{i=1}^{n} x_i^2\)
 
 #### Rastrigin's Function !!
 Rastrigin's Function is a highly oscillatory function that provides a challenging landscape for optimization algorithms due to its large number of local minima. It's great for testing an algorithm's ability to find a global optimum amidst noise and local optima.
-- Equation: \(f(\mathbf{x}) = 10n + \sum_{i=1}^{n}\left[x_i^2 - 10\cos(2\pi x_i)\right]\)
+
 
 #### Rosenbrock's Function !!
 Also known as the Valley or Banana function, the Rosenbrock function is a non-convex function used to test the performance of optimization algorithms. It has a narrow, curved valley containing the global minimum, testing the algorithms' precision and convergence to the minimum.
-- Equation: \(f(\mathbf{x}) = \sum_{i=1}^{n-1} \left[100(x_{i+1} - x_i^2)^2 + (1-x_i)^2\right]\)
 
 
 These functions were chosen for their ability to test the algorithms' exploration and exploitation capabilities, convergence speed, and robustness to local optima.
