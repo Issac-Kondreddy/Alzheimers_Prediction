@@ -54,7 +54,6 @@ class GeneticAlgorithm:
                     offspring[idx, gene] += random_value
         return offspring
 
-
     def run(self):
         self.initialize_population()
         self.best_fitness_per_generation = []  # Reset at the start of a new run
@@ -62,7 +61,8 @@ class GeneticAlgorithm:
         self.std_deviation_history = []
         self.convergence_generation = None
         best_fitness_ever = float('inf')
-        
+        no_improvement_streak = 0  # Tracks the number of generations without improvement
+
         for generation in range(self.generations):
             self.evaluate_population()
             best_fitness = np.min(self.fitness)
@@ -70,25 +70,43 @@ class GeneticAlgorithm:
             std_deviation = np.std(self.fitness)
             if best_fitness < best_fitness_ever:
                 best_fitness_ever = best_fitness
+                no_improvement_streak = 0  # Reset if there's improvement
+            else:
+                no_improvement_streak += 1  # Increment if there's no improvement
+
+            # Update the convergence generation if the no improvement streak reaches a certain threshold
+            if no_improvement_streak >= 10:  # For example, after 10 generations of no improvement
                 if self.convergence_generation is None:
-                    self.convergence_generation = generation
-            
+                    self.convergence_generation = generation - 10  # Subtracting 10 because that's when the improvement stopped
+
             self.best_fitness_per_generation.append(best_fitness)
             self.average_fitness_history.append(average_fitness)
             self.std_deviation_history.append(std_deviation)
-            
+
             parents = self.select_parents()
             offspring_crossover = self.crossover(parents)
             offspring_mutation = self.mutate(offspring_crossover)
             self.population = offspring_mutation
             self.evaluate_population()
-        
+
         best_overall_idx = np.argmin(self.fitness)
         best_solution = self.population[best_overall_idx]
         best_solution_fitness = self.fitness[best_overall_idx]
-        
-        return (best_solution, best_solution_fitness, self.best_fitness_per_generation, 
-                self.average_fitness_history, self.std_deviation_history, self.convergence_generation)
 
-    # ... (rest of your GeneticAlgorithm class)
+        return {
+            'Best Solution': best_solution,
+            'Best Fitness': best_solution_fitness,
+            'Best Fitness Per Generation': self.best_fitness_per_generation,
+            'Average Fitness History': self.average_fitness_history,
+            'Standard Deviation History': self.std_deviation_history,
+            'Convergence Generation': self.convergence_generation if self.convergence_generation else self.generations,
+            'Parameters': {
+                'Population Size': self.population_size,
+                'Chromosome Length': self.chromosome_length,
+                'Crossover Rate': self.crossover_rate,
+                'Mutation Rate': self.mutation_rate,
+                'Generations': self.generations
+            }
+        }
+
 
