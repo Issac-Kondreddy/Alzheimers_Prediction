@@ -6,18 +6,25 @@ import matplotlib.pyplot as plt
 import json
 
 # Parameters for PSO
-num_particles = 30
-iterations = 100
-c1 = 1.49
-c2 = 1.49
-w = 0.729
+num_particles = 300
+iterations = 1000
+c1 = 1.56
+c2 = 1.56
+w = 0.66
 
 # Define bounds for each function, assuming a 30-dimensional search space
-bounds = [(-100, 100)] * 30  # Adjust these bounds as needed for each benchmark function
+bounds = [(-1000, 1000)] * 45  # Adjust these bounds as needed for each benchmark function
+function_params = {
+    'sphere': {'num_particles': 100, 'iterations': 500, 'c1': 2.05, 'c2': 2.05, 'w': 0.729},
+    'ackley': {'num_particles': 150, 'iterations': 700, 'c1': 1.8, 'c2': 1.8, 'w': 0.6},
+    'rastrigin': {'num_particles': 200, 'iterations': 800, 'c1': 1.5, 'c2': 1.5, 'w': 0.7},
+    'rosenbrock': {'num_particles': 250, 'iterations': 1000, 'c1': 2.0, 'c2': 2.0, 'w': 0.5}
+}
+
 
 # Function to run PSO and return metrics
-def run_pso_on_function(function, bounds):
-    pso = PSO(function, bounds, num_particles, iterations, c1, c2, w)
+def run_pso_on_function(function, bounds, params):
+    pso = PSO(function, bounds, params['num_particles'], params['iterations'], params['c1'], params['c2'], params['w'])
     best_position, best_fitness, fitness_history = pso.run()
     average_fitness = np.mean(fitness_history)
     std_dev_fitness = np.std(fitness_history)
@@ -37,9 +44,11 @@ benchmark_functions = {
 results = {}
 
 # Running PSO on each benchmark function
+# Running PSO on each benchmark function
 for name, function in benchmark_functions.items():
     print(f"Running PSO on {name} function...")
-    best_position, best_fitness, avg_fitness, std_dev, conv_gen, fitness_hist = run_pso_on_function(function, bounds)
+    params = function_params[name]  # Retrieve the specific parameters for the current function
+    best_position, best_fitness, avg_fitness, std_dev, conv_gen, fitness_hist = run_pso_on_function(function, bounds, params)  # Pass the parameters
     results[name] = {
         'Best Position': best_position.tolist(),  # Converting numpy array to list for JSON serialization
         'Best Fitness': best_fitness,
